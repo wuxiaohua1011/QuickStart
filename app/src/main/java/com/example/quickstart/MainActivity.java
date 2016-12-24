@@ -352,17 +352,15 @@ public class MainActivity extends Activity
          * @throws IOException
          */
         private List<String> getDataFromApi() throws IOException {
-            String spreadsheetId = "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms";
-            String range = "Class Data!A2:E";
+            String spreadsheetId = "1DHqf4fFbxq0Sn0xwIAnD4QKbDF-QvR8owBAdu0Qk1q0";
+            String range = "Form Responses 1!A2:D5";
             List<String> results = new ArrayList<String>();
-            ValueRange response = this.mService.spreadsheets().values()
-                    .get(spreadsheetId, range)
-                    .execute();
+            ValueRange response = this.mService.spreadsheets().values().get(spreadsheetId, range).execute();
             List<List<Object>> values = response.getValues();
             if (values != null) {
-                results.add("Name, Major");
+                results.add("Time Logged, Name, Date, Status");// TODO: 12/23/2016 find a way to display ALL data programatically(how to avoid/counter getting null data)
                 for (List row : values) {
-                    results.add(row.get(0) + ", " + row.get(4));
+                    results.add(row.get(0) + ", " + row.get(1) + ", " + row.get(2)+", " + row.get(3)); // TODO: 12/23/2016 post data in a list of structured text field instead of unorganized list 
                 }
             }
             return results;
